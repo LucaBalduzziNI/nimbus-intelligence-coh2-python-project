@@ -5,9 +5,11 @@ import os
 
 # Custom Modules
 try:
-    from . import secret_stuff
-except Exception as e:
     import secret_stuff
+    import errors
+except Exception as e:
+    from . import secret_stuff
+    from .errors import *
 
 def translate_string(original_string, language_code):
     
