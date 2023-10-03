@@ -6,7 +6,7 @@ import os
 # Custom Modules
 try:
     import secret_stuff
-    import errors
+    from errors import *
 except Exception as e:
     from . import secret_stuff
     from .errors import *
