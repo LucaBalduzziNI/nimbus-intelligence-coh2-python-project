@@ -1,6 +1,9 @@
 # Folders
 .venv
 
-# Files
+# Settings Filse
 PipFile
 PipFile.lock
+
+# Secret Files
+secret_stuff.py
