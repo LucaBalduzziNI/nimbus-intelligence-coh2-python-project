@@ -1,12 +1,17 @@
+# Modules
 import requests
 import json
 import os
 
-import secret_stuff
+# Custom Modules
+try:
+    from . import secret_stuff
+except Exception as e:
+    import secret_stuff
 
 def translate_string(original_string, language_code):
     
-    #Check if language is available within the API
+    # Check if language is available within the API
     url = "https://google-translate1.p.rapidapi.com/language/translate/v2/languages"
 
     headers = {
