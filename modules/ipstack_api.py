@@ -3,7 +3,7 @@ import json
 import os
 
 
-def resolve_ip(address)
+def resolve_ip(address):
     #IP Stack API Key
     API_KEY = os.getenv('IPSTACK_APIKEY')
 
@@ -15,14 +15,14 @@ def resolve_ip(address)
         datajson = data.json()
         
         #Check if a language was resolved
-        if datajson['location']['languages'] != null:
+        if datajson['location']['languages'] is not None:
         
             #Return language code
             return datajson['location']['languages'][0]['name']
             
         else:
-        raise Exception("No language was resolved")
+            raise Exception("No language was resolved")
     
     else:
-    raise Exception("Connection error")
+        raise Exception("Connection error")
        
