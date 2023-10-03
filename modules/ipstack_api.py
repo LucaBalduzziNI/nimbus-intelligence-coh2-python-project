@@ -2,8 +2,12 @@
 import requests
 
 # Custom Modules
-import secret_stuff
-from errors import *
+try:
+    import secret_stuff
+    from errors import *
+except Exception as e:
+    from . import secret_stuff
+    from .errors import *
 
 
 def resolve_ip(ip: str) -> str:
