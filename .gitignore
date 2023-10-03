@@ -4,3 +4,6 @@
 # Files
 PipFile
 PipFile.lock
+
+# Secret Files
+secret_stuff.py
