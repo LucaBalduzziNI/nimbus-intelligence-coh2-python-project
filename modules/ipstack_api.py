@@ -18,8 +18,8 @@ def resolve_ip(ip: str):
         data = response.json()
 
         # Check if the Ip has been resolved
-        if 'location' in data:
-            return data['location']['languages'][0]['name']
+        if 'location' in data and data['location']['languages'] is not None:
+            return data['location']['languages'][0]['code']
         else:
             raise IpCantBeResolved(ip) 
     else:
@@ -27,6 +27,6 @@ def resolve_ip(ip: str):
 
 # Testing purposes
 if __name__ == '__main__':
-    address = input('Inser IP address: ')
+    address = input('Insert IP address: ')
     print(resolve_ip(address))
        
