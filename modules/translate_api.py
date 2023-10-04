@@ -22,7 +22,7 @@ def translate_string(original_string: str, language_code: str, source_language: 
         LanguageCantBeTranslated: _description_
 
     Returns:
-        _type_: The translated text
+        str: The translated text
     """
 
     # Check if string even needs translating
