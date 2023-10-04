@@ -18,6 +18,16 @@ class LanguageCantBeTranslated(Exception):
     def __str__(self):
         return f'Language {self.language} can\'t be translated!'
 
+class TextIsBlank(Exception):
+    """Exception raised if the text for the TTS is blank"""
+
+    def __init__(self, *args):
+        super().__init__(args)
+    
+    def __str__(self):
+        return 'The provided text to translate is blank!'
+
+
 class LanguageCantBeSpoken(Exception):
     """Exception raised if the given language can't be spoken"""
     
