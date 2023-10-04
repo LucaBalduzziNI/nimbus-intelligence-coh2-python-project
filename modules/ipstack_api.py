@@ -21,7 +21,7 @@ def resolve_ip(ip: str) -> str:
         ConnectionError: _description_
 
     Returns:
-        str: Language code where the IP is
+        list: List of language codes (str) where the IP is
     """
 
     # IP Stack API Key
@@ -33,9 +33,14 @@ def resolve_ip(ip: str) -> str:
     # Check if HTTP request succeeded
     if response.status_code == 200:      
         data = response.json()
+        language_list = []
         # Check if the Ip has been resolved
         if 'location' in data and data['location']['languages'] is not None:
-            return data['location']['languages'][0]['code']
+
+            for language in data['location']['languages']:
+                language_list.append(language['code'])
+
+            return language_list
         else:
             raise IpCantBeResolved(ip)
     else:

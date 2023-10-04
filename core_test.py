@@ -6,7 +6,10 @@ import modules.errors
 
 userIP = ipify.get_ip()
 
-userLanguage = ipstack.resolve_ip(userIP)
+userLanguages = ipstack.resolve_ip(userIP)
+
+userLanguage = userLanguages[0]
+
 userMessage = translate.translate_string("Hello, this is a test, will this be in the correct language?", userLanguage)
 print(userMessage)
 with open('myfile.wav', mode='bw') as f:
