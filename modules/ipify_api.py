@@ -13,4 +13,4 @@ def get_ip() -> str:
     Returns:
         str: IP address
     """
-    return(requests.get('https://api.ipify.org').text)
+    return requests.get('https://api.ipify.org').text
