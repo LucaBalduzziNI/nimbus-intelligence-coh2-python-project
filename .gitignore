@@ -1,7 +1,7 @@
 # Folders
 .venv
 
-# Files
+# Settings Filse
 PipFile
 PipFile.lock
 *.wav

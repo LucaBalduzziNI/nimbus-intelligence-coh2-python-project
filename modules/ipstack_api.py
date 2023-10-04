@@ -11,6 +11,19 @@ except Exception as e:
 
 
 def resolve_ip(ip: str) -> str:
+    """Resolves the provided IP returning the code language spoken.
+
+    Args:
+        ip (str): IP address
+
+    Raises:
+        IpCantBeResolved: _description_
+        ConnectionError: _description_
+
+    Returns:
+        str: Language code where the IP is
+    """
+
     # IP Stack API Key
     API_KEY = secret_stuff.IP_STACK_API_KEY
 

@@ -16,7 +16,7 @@ class IpCantBeResolved(Exception):
         super().__init__(args)
         self.ip = ip
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'The ip {self.ip} does not resolve to any existing one!'
     
 class LanguageCantBeTranslated(Exception):
@@ -26,7 +26,7 @@ class LanguageCantBeTranslated(Exception):
         super().__init__(args)
         self.language = language
     
-    def __str__(self):
+    def __str__(self) -> str:
         return f'Language {self.language} can\'t be translated!'
 
 class TextIsBlank(Exception):
@@ -46,5 +46,5 @@ class LanguageCantBeSpoken(Exception):
         super().__init__(args)
         self.language = language
     
-    def __str__(self):
+    def __str__(self) -> str:
         return f'Language {self.language} can\'t be spoken!' 
