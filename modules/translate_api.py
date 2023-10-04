@@ -67,7 +67,7 @@ def translate_string(original_string, language_code, source_language = "en"):
     else:
        return(original_string)
 
-print(translate_string("This is a test", "en", "en"))
+#print(translate_string("This is a test", "en", "en"))
 #print(translate_string("This is a test", "it"))
 #print(translate_string("This is a test", "nl"))
 #print(translate_string("This is a test", "ja"))

@@ -34,7 +34,7 @@ def text_to_speech(text: str, lang: str) -> bytes:
     }
 
     # Text is a blank string
-    if not text.isalnum():
+    if len(text) == 0:
         raise TextIsBlank()
 
     # Checking if the language can be spoken

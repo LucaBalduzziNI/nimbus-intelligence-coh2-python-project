@@ -20,7 +20,6 @@ def resolve_ip(ip: str) -> str:
     # Check if HTTP request succeeded
     if response.status_code == 200:      
         data = response.json()
-        print(data)
         # Check if the Ip has been resolved
         if 'location' in data and data['location']['languages'] is not None:
             return data['location']['languages'][0]['code']
