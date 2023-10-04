@@ -1,7 +1,5 @@
 # Modules
 import requests
-import json
-import os
 
 # Custom Modules
 try:
@@ -11,8 +9,23 @@ except Exception as e:
     from . import secret_stuff
     from .errors import *
 
-def translate_string(original_string, language_code, source_language = "en"):
-   # Check if string even needs translating
+def translate_string(original_string: str, language_code: str, source_language: str = "en") -> str:
+    """Translates a string from a language to another.
+
+    Args:
+        original_string (str): Text to be translated
+        language_code (str): Language code for the string to be translated to.
+        source_language (str, optional): Source language the text derives from. Defaults to "en".
+
+    Raises:
+        APITranslationError: _description_
+        LanguageCantBeTranslated: _description_
+
+    Returns:
+        _type_: The translated text
+    """
+
+    # Check if string even needs translating
     if language_code != source_language:
 
         # Check if language is available within the API
@@ -59,15 +72,15 @@ def translate_string(original_string, language_code, source_language = "en"):
                 return(translation['data']['translations'][0]['translatedText'])
             
             else:
-                raise Exception("Translation API failure")
+                raise APITranslationError(source_language, language_code)
             
             
         else:
-            raise Exception("The language can not be translated")
+            raise LanguageCantBeTranslated(language_code)
     else:
-       return(original_string)
+       return original_string
 
-#print(translate_string("This is a test", "en", "en"))
+print(translate_string("This is a test", "en", "en"))
 #print(translate_string("This is a test", "it"))
 #print(translate_string("This is a test", "nl"))
 #print(translate_string("This is a test", "ja"))
