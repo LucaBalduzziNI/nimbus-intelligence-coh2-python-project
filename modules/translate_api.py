@@ -80,7 +80,8 @@ def translate_string(original_string: str, language_code: str, source_language: 
     else:
        return original_string
 
-print(translate_string("This is a test", "en", "en"))
-#print(translate_string("This is a test", "it"))
-#print(translate_string("This is a test", "nl"))
-#print(translate_string("This is a test", "ja"))
+if __name__ == "__main__":
+    print(translate_string("This is a test", "en", "en"))
+    #print(translate_string("This is a test", "it"))
+    #print(translate_string("This is a test", "nl"))
+    #print(translate_string("This is a test", "ja"))
