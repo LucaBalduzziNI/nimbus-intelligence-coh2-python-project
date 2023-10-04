@@ -4,6 +4,7 @@
 # Settings Filse
 PipFile
 PipFile.lock
+*.wav
 
 # Secret Files
 secret_stuff.py
