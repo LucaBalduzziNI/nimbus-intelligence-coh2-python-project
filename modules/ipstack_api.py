@@ -10,7 +10,7 @@ except Exception as e:
     from .errors import *
 
 
-def resolve_ip(ip: str) -> str:
+def resolve_ip(ip: str) -> dict:
     """Resolves the provided IP returning the code language spoken.
 
     Args:
@@ -21,7 +21,7 @@ def resolve_ip(ip: str) -> str:
         ConnectionError: _description_
 
     Returns:
-        str: Language code where the IP is
+        dict: Dictionary containing the location code and a list of language codes spoken in this location
     """
 
     # IP Stack API Key
@@ -33,9 +33,17 @@ def resolve_ip(ip: str) -> str:
     # Check if HTTP request succeeded
     if response.status_code == 200:      
         data = response.json()
+        language_list = []
         # Check if the Ip has been resolved
         if 'location' in data and data['location']['languages'] is not None:
-            return data['location']['languages'][0]['code']
+
+            for language in data['location']['languages']:
+                language_list.append(language['code'])
+            country_code = data['country_code']
+            country_name = data['country_name']
+            country_flag = data['location']['country_flag']
+
+            return {"country_code": country_code, "languages": language_list, "country_name": country_name, "country_flag": country_flag}
         else:
             raise IpCantBeResolved(ip)
     else:
