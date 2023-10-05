@@ -37,7 +37,7 @@ def check_if_translatable(language_code: str):
     for language in languages['data']['languages']:
         language_list.append(language['language'])
         
-    if language_code in language_list and source_language in language_list:
+    if language_code in language_list:
         return(True)
     else:
         return(False)
@@ -63,7 +63,7 @@ def translate_string(original_string: str, language_code: str, source_language: 
     if language_code != source_language:
 
         # Check if language is available within the API
-        if (check_if_translatable):
+        if (check_if_translatable(language_code) & check_if_translatable(source_language)):
             
             #Translate the string
             url = "https://google-translate1.p.rapidapi.com/language/translate/v2"
