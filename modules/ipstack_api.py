@@ -10,7 +10,7 @@ except Exception as e:
     from .errors import *
 
 
-def resolve_ip(ip: str) -> str:
+def resolve_ip(ip: str) -> dict:
     """Resolves the provided IP returning the code language spoken.
 
     Args:
