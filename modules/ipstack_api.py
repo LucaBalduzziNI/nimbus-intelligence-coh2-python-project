@@ -40,8 +40,10 @@ def resolve_ip(ip: str) -> str:
             for language in data['location']['languages']:
                 language_list.append(language['code'])
             country_code = data['country_code']
+            country_name = data['country_name']
+            country_flag = data['location']['country_flag']
 
-            return {"country_code": country_code, "languages": language_list}
+            return {"country_code": country_code, "languages": language_list, "country_name": country_name, "country_flag": country_flag}
         else:
             raise IpCantBeResolved(ip)
     else:
