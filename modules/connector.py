@@ -1,6 +1,6 @@
 # Modules
 from snowflake import connector
-from typing import List, Tuple, Union
+from typing import List
 
 # Custom Modules
 try:
@@ -8,7 +8,7 @@ try:
 except Exception as e:
     from . import secret_stuff
 
-def execute_query(query: str, params: Tuple[str] = None) -> List[dict]:
+def execute_query(query: str, params: tuple = None) -> List[dict]:
     """This method interacts with snowflake through the snowflake connector, handling the opening and closing of the connection.
 
     Raises:
