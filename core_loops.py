@@ -39,4 +39,10 @@ language_list = userLocation['languages']
 for language in language_list:
     query = f"INSERT INTO LANGUAGES_COUNTRY (country_code, language_code) VALUES ({userCountry}, {language})"
 
+#Check if each language is known to be translatable and spoken
+language_list_details = []
+for language in language_list:
+    query = f"SELECT language_code, can_be_translated, can_be_spoken FROM LANGUAGES WHERE LANGUAGE_CODE = {language}"
+    #if len(results) = 1
+    language_list_details.append([result['language_code'], result['can_be_translated'], result['can_be_spoken']])
 
