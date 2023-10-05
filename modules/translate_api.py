@@ -76,7 +76,7 @@ def translate_string(original_string: str, language_code: str, source_language: 
             headers = {
                 "content-type": "application/x-www-form-urlencoded",
                 "Accept-Encoding": "application/gzip",
-                "X-RapidAPI-Key": "716e9bf1b0mshad02c68002e32bdp142e29jsn934d45a3cf44",
+                "X-RapidAPI-Key": secret_stuff.GOOGLE_TRANS_API_KEY,
                 "X-RapidAPI-Host": "google-translate1.p.rapidapi.com"
             }
 
