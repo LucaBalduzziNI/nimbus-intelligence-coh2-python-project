@@ -6,9 +6,10 @@ import modules.errors
 
 userIP = ipify.get_ip()
 
-userLanguages = ipstack.resolve_ip(userIP)
+userLocation = ipstack.resolve_ip(userIP)
 
-userLanguage = userLanguages[0]
+userCountry = userLocation['country_code']
+userLanguage = userLocation['languages'][0]
 
 userMessage = translate.translate_string("Hello, this is a test, will this be in the correct language?", userLanguage)
 print(userMessage)

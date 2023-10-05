@@ -21,7 +21,7 @@ def resolve_ip(ip: str) -> str:
         ConnectionError: _description_
 
     Returns:
-        list: List of language codes (str) where the IP is
+        dict: Dictionary containing the location code and a list of language codes spoken in this location
     """
 
     # IP Stack API Key
@@ -39,8 +39,9 @@ def resolve_ip(ip: str) -> str:
 
             for language in data['location']['languages']:
                 language_list.append(language['code'])
+            country_code = data['country_code']
 
-            return language_list
+            return {"country_code": country_code, "languages": language_list}
         else:
             raise IpCantBeResolved(ip)
     else:
