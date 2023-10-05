@@ -63,7 +63,7 @@ def translate_string(original_string: str, language_code: str, source_language: 
     if language_code != source_language:
 
         # Check if language is available within the API
-        if (check_if_translatable(language_code) & check_if_translatable(source_language)):
+        if (check_if_translatable(language_code) and check_if_translatable(source_language)):
             
             #Translate the string
             url = "https://google-translate1.p.rapidapi.com/language/translate/v2"
