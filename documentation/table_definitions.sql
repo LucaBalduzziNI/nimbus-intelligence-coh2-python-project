@@ -31,6 +31,6 @@ CREATE OR REPLACE TABLE Translations(
     language_code varchar,
     text_id int,
     target_txt varchar,
-    target_audio varchar
+    target_audio_bin binary
 );
 
