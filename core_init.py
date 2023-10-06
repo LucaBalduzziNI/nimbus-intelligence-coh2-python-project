@@ -97,16 +97,19 @@ def init_app(userIP: str = None):
     for language in language_list:
         query = f"SELECT language_code, can_be_translated, can_be_spoken FROM LANGUAGES WHERE LANGUAGE_CODE = '{language}'"
         results = connect.execute_query(query)
-    if len(results) == 1:
-        #Retrieve cached knowledge on languages
-        language_list_details.append([language, result['CAN_BE_TRANSLATED'], result['CAN_BE_SPOKEN']])
-    else:
-        #Retrieve new list of knowledge on languages and cache them
-        can_be_translated = tts.check_if_spoken(language)
-        can_be_spoken = translate.check_if_translatable(language)
-        language_list_details.append([language, can_be_translated, can_be_spoken])
-        query = f"INSERT INTO LANGUAGES (language_code, can_be_translated, can_be_spoken) VALUES ('{language}', '{can_be_translated}', '{can_be_spoken}')"
-        connect.execute_query(query)
+        if len(results) == 1:
+            #Retrieve cached knowledge on languages
+            print(results)
+            can_be_translated = results['CAN_BE_TRANSLATED']
+            can_be_spoken = results['CAN_BE_SPOKEN']
+            language_list_details.append([language, can_be_translated, can_be_spoken])
+        else:
+            #Retrieve new list of knowledge on languages and cache them
+            can_be_translated = translate.check_if_translatable(language)
+            can_be_spoken = tts.check_if_spoken(language)
+            language_list_details.append([language, can_be_translated, can_be_spoken])
+            query = f"INSERT INTO LANGUAGES (language_code, can_be_translated, can_be_spoken) VALUES ('{language}', '{can_be_translated}', '{can_be_spoken}')"
+            connect.execute_query(query)
 
     return [countryName, countryFlag], language_list_details, userLanguage
 
