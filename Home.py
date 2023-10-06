@@ -32,7 +32,6 @@ def main():
         _, btn_col, _ = st.columns((4,2,4))
         with btn_col as col:
             st.button('Click for Geolocalization!', on_click=get_ip, use_container_width=True)
-
     else:
         # Displaying ip infos and country flag
         ip_col, flag_col = st.columns(2)
@@ -49,17 +48,16 @@ def main():
         languages = ['en', 'it']
         #set_pref_lang('it')
         play = False
-        if st.session_state[SESSION_PREF_LANG] == '' and len(languages) > 1 and st.session_state[SESSION_PREF_LANG_SET] == False:
-            preferred_lang = st.selectbox('Select your preferred language', languages, key=SESSION_PREF_LANG)
+        if st.session_state[SESSION_PREF_LANG_SET] == False and st.session_state[SESSION_PREF_LANG] == '' and len(languages) > 1:
+            preferred_lang = st.selectbox('Select your preferred language', languages)
             _, btn_col_lang_sel, _ = st.columns(3)
             with btn_col_lang_sel as col:
-                stateful_button.button('Confirm language', key=SESSION_PREF_LANG_SET, on_click=lambda: set_pref_lang(preferred_lang),  use_container_width=True)
-                #st.button('Confirm language', key=SESSION_PREF_LANG_SET, on_click=lambda: set_pref_lang(preferred_lang),  use_container_width=True)
+                st.button('Confirm language', key=SESSION_PREF_LANG_SET, on_click=lambda: set_pref_lang(preferred_lang),  use_container_width=True)
         else:
             st.session_state[SESSION_PREF_LANG_SET] = True
         
         # Greet the user
-        greeting = 'Buongiorno'
+        greeting = 'Good Morning'
         audio = tts_api.text_to_speech(greeting, st.session_state[SESSION_PREF_LANG])
         md_audio = md_autoplay_audio(audio)
         if st.session_state[SESSION_PREF_LANG_SET]:
