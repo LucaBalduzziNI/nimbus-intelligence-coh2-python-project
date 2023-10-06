@@ -2,18 +2,27 @@
 import time
 import base64
 import streamlit as st
-from streamlit_extras import add_vertical_space
+from streamlit_extras import add_vertical_space, stateful_button
 
 # Custom Modules
 from modules import ipify_api, ipstack_api, tts_api
 from gui_utils.session import *
 
-# Configurations
-st.set_page_config(page_title='Translation and TTS App', page_icon='🌐', layout='wide')
+
 
 # App
 def main():
 
+    # Configurations
+    st.set_page_config(page_title='Translation and TTS App', page_icon='🌐', layout='wide')
+    
+    # Session Settings
+    st.session_state.setdefault(SESSION_IP, '')
+    st.session_state.setdefault(SESSION_LOADING_IP, '')
+    st.session_state.setdefault(SESSION_PREF_LANG, '')
+    st.session_state.setdefault(SESSION_PREF_LANG_SET, False)
+    st.session_state.setdefault(SESSION_AUDIO_AUTOPLAY, True)
+    
     app_title = st.title('Translation and TTS App 🌐')
     
     st.divider()
@@ -41,10 +50,11 @@ def main():
         #set_pref_lang('it')
         play = False
         if st.session_state[SESSION_PREF_LANG] == '' and len(languages) > 1 and st.session_state[SESSION_PREF_LANG_SET] == False:
-            preferred_lang = st.selectbox('Select your preferred language', languages)#, key=SESSION_PREF_LANG)
+            preferred_lang = st.selectbox('Select your preferred language', languages, key=SESSION_PREF_LANG)
             _, btn_col_lang_sel, _ = st.columns(3)
             with btn_col_lang_sel as col:
-                st.button('Confirm language', key=SESSION_PREF_LANG_SET, on_click=lambda: set_pref_lang(preferred_lang),  use_container_width=True)
+                stateful_button.button('Confirm language', key=SESSION_PREF_LANG_SET, on_click=lambda: set_pref_lang(preferred_lang),  use_container_width=True)
+                #st.button('Confirm language', key=SESSION_PREF_LANG_SET, on_click=lambda: set_pref_lang(preferred_lang),  use_container_width=True)
         else:
             st.session_state[SESSION_PREF_LANG_SET] = True
         
