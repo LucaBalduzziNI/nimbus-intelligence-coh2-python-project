@@ -27,9 +27,11 @@ def init_app(userIP: str = None):
                 ]
 
             list: Details of languages spoken in country
-                [   str: Language code
-                    bool: Language can be translated
-                    bool: Language can be spoken
+                [
+                    [   str: Language code
+                        bool: Language can be translated
+                        bool: Language can be spoken
+                    ]
                 ]
             
             str: Preferred language
