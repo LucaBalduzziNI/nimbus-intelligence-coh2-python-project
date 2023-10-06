@@ -99,9 +99,8 @@ def init_app(userIP: str = None):
         results = connect.execute_query(query)
         if len(results) == 1:
             #Retrieve cached knowledge on languages
-            print(results)
-            can_be_translated = results['CAN_BE_TRANSLATED']
-            can_be_spoken = results['CAN_BE_SPOKEN']
+            can_be_translated = results[0]['CAN_BE_TRANSLATED']
+            can_be_spoken = results[0]['CAN_BE_SPOKEN']
             language_list_details.append([language, can_be_translated, can_be_spoken])
         else:
             #Retrieve new list of knowledge on languages and cache them
