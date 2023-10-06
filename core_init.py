@@ -54,7 +54,7 @@ def init_app(userIP: str = None) -> ip_country:
         # Retrieve new values for IP and cache them
         userLocation = ipstack.resolve_ip(userIP)
         userCountryCode = userLocation['country_code']
-        userLanguage = userLocation['languages'][0]
+        userLanguage = userLocation['languages'][0] if len(userLocation['languages']) == 1 else ''
         query = f"INSERT INTO IP_ADDRESSES (ip_address, country_code, pref_lang_code) VALUES('{userIP}','{userCountryCode}','{userLanguage}')"
         connect.execute_query(query)
     
