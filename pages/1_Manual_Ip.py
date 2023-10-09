@@ -18,7 +18,7 @@ def manual_ip():
 
     ips = [None, '109.88.0.0']
     st.markdown('### Select an IP address from the list:')
-    ip = st.selectbox('', ips)
+    ip = st.selectbox('A', ips, label_visibility='hidden')
     st.session_state[SESSION_IP] = ip
     _, btn_col, _ = st.columns((4,2,4))
     with btn_col as col:

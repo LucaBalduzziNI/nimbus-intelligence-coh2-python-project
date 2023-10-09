@@ -24,7 +24,7 @@ def settings():
     # Change prefered language if multiple are available
     if st.session_state[SESSION_COUNTRY_LANGUAGES] and len(st.session_state[SESSION_COUNTRY_LANGUAGES]) > 1:
         st.markdown('### Select your preferred language:')
-        pref_lang_code = st.selectbox('', st.session_state[SESSION_COUNTRY_LANGUAGES], format_func=lambda language: language[1])
+        pref_lang_code = st.selectbox('A', st.session_state[SESSION_COUNTRY_LANGUAGES], format_func=lambda language: language[1], label_visibility='hidden')
         st.session_state[SESSION_PREF_LANG] = pref_lang_code[0]
         _, btn_col_lang_sel, _ = st.columns((4,2,4))
         with btn_col_lang_sel as col:

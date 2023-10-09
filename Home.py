@@ -43,7 +43,7 @@ def main():
         # Checking if multiple languages can be selected or aready selected preferred language
         if not st.session_state[SESSION_PREF_LANG_SET]:
             st.markdown('### Select your preferred language:')
-            pref_lang_code = st.selectbox('', st.session_state[SESSION_COUNTRY_LANGUAGES], format_func=lambda language: language[1])
+            pref_lang_code = st.selectbox('A', st.session_state[SESSION_COUNTRY_LANGUAGES], format_func=lambda language: language[1], label_visibility='hidden')
             st.session_state[SESSION_PREF_LANG] = pref_lang_code[0]
             _, btn_col_lang_sel, _ = st.columns(3)
             with btn_col_lang_sel as col:
