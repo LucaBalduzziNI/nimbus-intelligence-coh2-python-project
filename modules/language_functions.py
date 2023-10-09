@@ -1,13 +1,15 @@
-import connector as connect
-import translate_api as translate
-import tts_api as tts
-
 # Custom Modules
 try:
     import secret_stuff
+    import connector as connect
+    import translate_api as translate
+    import tts_api as tts
     from errors import *
 except Exception as e:
     from . import secret_stuff
+    from . import connector as connect
+    from . import translate_api as translate
+    from . import tts_api as tts
     from .errors import *
 
 def translate_string(original_string: str, language_code: str, source_language: str = "en") -> str:
