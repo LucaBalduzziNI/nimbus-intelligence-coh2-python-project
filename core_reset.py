@@ -4,8 +4,6 @@ try:
 except Exception as e:
     from . import connector as connect
 
-def reset_cache():
+def reset_cache(table: str):
     query = "DELETE FROM "
-    tables = ['Countries', 'IP_Addresses', 'Languages_Country', 'Languages', 'Text_types', 'Translations']
-    for table in tables:
-        connect.execute_query(query + table)
+    connect.execute_query(query + table)
