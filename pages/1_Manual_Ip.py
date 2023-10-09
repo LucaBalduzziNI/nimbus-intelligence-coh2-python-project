@@ -1,11 +1,7 @@
 # Modules
-import time
-import base64
 import streamlit as st
-from streamlit_extras import add_vertical_space, stateful_button
 
 # Custom Modules
-from modules import ipify_api, ipstack_api, tts_api
 from gui.session import *
 from core_init import init_app
 
@@ -21,20 +17,22 @@ def manual_ip():
     st.divider()
 
     ips = [None, '109.88.0.0']
-    ip = st.selectbox('Select an Ip', ips)
-    if ip:
-        st.session_state[SESSION_IP] = ip
-    st.button('Confirm', on_click=set_ip)
+    st.markdown('### Select an IP address from the list:')
+    ip = st.selectbox('', ips)
+    st.session_state[SESSION_IP] = ip
+    _, btn_col, _ = st.columns((4,2,4))
+    with btn_col as col:
+        st.button('Confirm', on_click=set_ip, use_container_width=True)
 
 def set_ip():
-    ip_country = init_app(userIP=st.session_state[SESSION_IP])
-    #st.session_state[SESSION_IP] = ip_country.ip_address
-    if ip_country.pref_lang_code:
-        st.session_state[SESSION_PREF_LANG] = ip_country.pref_lang_code
-        st.session_state[SESSION_PREF_LANG_SET] = False
-    st.session_state[SESSION_COUNTRY_NAME] = ip_country.country_name
-    st.session_state[SESSION_COUNTRY_FLAG] = ip_country.country_flag
-    st.session_state[SESSION_COUNTRY_LANGUAGES] = ip_country.lang_details
+    if st.session_state[SESSION_IP]:
+        ip_country = init_app(userIP=st.session_state[SESSION_IP])
+        if ip_country.pref_lang_code:
+            st.session_state[SESSION_PREF_LANG] = ip_country.pref_lang_code
+            st.session_state[SESSION_PREF_LANG_SET] = True
+        st.session_state[SESSION_COUNTRY_NAME] = ip_country.country_name
+        st.session_state[SESSION_COUNTRY_FLAG] = ip_country.country_flag
+        st.session_state[SESSION_COUNTRY_LANGUAGES] = ip_country.lang_details
 
 if __name__ == '__main__':
     manual_ip()
