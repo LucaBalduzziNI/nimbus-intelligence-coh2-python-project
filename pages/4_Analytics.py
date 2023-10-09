@@ -22,5 +22,18 @@ def analytics():
     app_title = st.title('Analytics 📊')
         
     st.divider()
-    
-    st.bar_chart(ip_analytics)
+
+    st.markdown('### IP, country and language data')
+    st.markdown('#### IPs per country')
+
+    st.text("Total resolved IP addresses cached: "+str(ip_analytics()))
+    st.bar_chart(country_code_analytics(), x = "COUNTRY_CODE")
+
+
+    st.markdown('#### Preferred languages per country')
+    countrySelect = st.selectbox("Country", country_list_analytics())
+    st.bar_chart(country_language_analytics(countrySelect), x = "PREF_LANG_CODE")
+
+
+if __name__ == '__main__':
+    analytics()
