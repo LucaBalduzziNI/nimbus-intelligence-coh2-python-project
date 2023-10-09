@@ -38,7 +38,7 @@ def resolve_ip(ip: str) -> dict:
         if 'location' in data and data['location']['languages'] is not None:
 
             for language in data['location']['languages']:
-                language_list.append(language['code'])
+                language_list.append([language['code'], language['native']])
             country_code = data['country_code']
             country_name = data['country_name']
             country_flag = data['location']['country_flag']
