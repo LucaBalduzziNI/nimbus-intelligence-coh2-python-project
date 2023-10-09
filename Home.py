@@ -56,7 +56,7 @@ def main():
             md_audio = md_autoplay_audio(audio)
             text_col, audio_col = st.columns(2)
             with text_col as col:
-                st.text(greeting)
+                st.text(trans_text)
             with audio_col as col:
                 st.markdown(md_audio, unsafe_allow_html=True)
                 
