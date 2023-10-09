@@ -9,6 +9,7 @@ from modules import language_functions
 from gui.session import *
 from core_init import init_app
 from core_set_pref_lang import set_pref_lang
+from core_info import get_info
 
 # App
 def main():
@@ -50,13 +51,13 @@ def main():
                 st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG]))
         else:
             # Greet the user
-            greeting = 'Hello'
-            trans_text = language_functions.translate_string(greeting, st.session_state[SESSION_PREF_LANG])
+            info = get_info(st.session_state[SESSION_IP])
+            trans_text = language_functions.translate_string(info, st.session_state[SESSION_PREF_LANG])
             audio = language_functions.text_to_speech(trans_text, st.session_state[SESSION_PREF_LANG])
             md_audio = md_autoplay_audio(audio)
             text_col, audio_col = st.columns(2)
             with text_col as col:
-                st.text(trans_text)
+                st.write(trans_text)
             with audio_col as col:
                 st.markdown(md_audio, unsafe_allow_html=True)
                 
