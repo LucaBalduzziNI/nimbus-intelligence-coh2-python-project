@@ -2,17 +2,19 @@
 import time
 import base64
 import streamlit as st
-from streamlit_extras import add_vertical_space, stateful_button
+from streamlit_extras import add_vertical_space
 
 # Custom Modules
-from modules import ipify_api, ipstack_api, tts_api
+from modules import tts_api
 from gui.session import *
 from core_init import init_app
+from core_set_pref_lang import set_pref_lang
 
 # App
 def main():
 
     initialize_session()
+    print(st.session_state)
     
     # Configurations
     st.set_page_config(page_title='Translation and TTS App', page_icon='🌐', layout='wide')
@@ -31,7 +33,7 @@ def main():
         ip_col, flag_col = st.columns(2)
         with ip_col as col:
             add_vertical_space.add_vertical_space(3)
-            st.text(f'Your IP is {st.session_state[SESSION_IP]} located in {st.session_state[SESSION_COUNTRY_NAME]}.')
+            st.markdown(f'#### Your IP is {st.session_state[SESSION_IP]} located in {st.session_state[SESSION_COUNTRY_NAME]}.')
             add_vertical_space.add_vertical_space(2)
         with flag_col as col:
             add_vertical_space.add_vertical_space(1)
@@ -40,10 +42,12 @@ def main():
         
         # Checking if multiple languages can be selected or aready selected preferred language
         if not st.session_state[SESSION_PREF_LANG_SET]:
-            st.selectbox('Select your preferred language', map(lambda i: i[0], st.session_state[SESSION_COUNTRY_LANGUAGES]), key=SESSION_PREF_LANG)
+            st.markdown('### Select your preferred language:')
+            pref_lang_code = st.selectbox('', st.session_state[SESSION_COUNTRY_LANGUAGES], format_func=lambda language: language[1])
+            st.session_state[SESSION_PREF_LANG] = pref_lang_code[0]
             _, btn_col_lang_sel, _ = st.columns(3)
             with btn_col_lang_sel as col:
-                st.button('Confirm language', on_click=pref_lang_set, use_container_width=True)
+                st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG]))
         else:
             # Greet the user
             greeting = 'Good Morning'
@@ -65,8 +69,9 @@ def init_ip():
     st.session_state[SESSION_COUNTRY_FLAG] = ip_country.country_flag
     st.session_state[SESSION_COUNTRY_LANGUAGES] = ip_country.lang_details
 
-def pref_lang_set():
+def set_session_pref_lang(ip_address: str, lang_code: str):
     st.session_state[SESSION_PREF_LANG_SET] = True
+    set_pref_lang(ip_address, lang_code)
 
 def md_autoplay_audio(audio: bytes) -> str:
     b64 = base64.b64encode(audio).decode()
