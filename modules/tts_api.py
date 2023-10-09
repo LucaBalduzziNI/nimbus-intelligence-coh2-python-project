@@ -70,8 +70,9 @@ def text_to_speech(text: str, lang: str) -> bytes:
     if len(text) == 0:
         raise TextIsBlank()
 
-    if(check_if_spoken) == False:
-        raise LanguageCantBeSpoken(lang)
+    #Commented as this should be handled outside the API through the cache
+    #if(check_if_spoken) == False:
+        #raise LanguageCantBeSpoken(lang)
 
     # Text to be translated
     params = {"text": text, "lang": lang}
