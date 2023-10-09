@@ -5,7 +5,7 @@ import streamlit as st
 from streamlit_extras import add_vertical_space
 
 # Custom Modules
-from modules import tts_api
+from modules import language_functions
 from gui.session import *
 from core_init import init_app
 from core_set_pref_lang import set_pref_lang
@@ -50,8 +50,9 @@ def main():
                 st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG]))
         else:
             # Greet the user
-            greeting = 'Good Morning'
-            audio = tts_api.text_to_speech(greeting, st.session_state[SESSION_PREF_LANG])
+            greeting = 'Hello'
+            trans_text = language_functions.translate_string(greeting, st.session_state[SESSION_PREF_LANG])
+            audio = language_functions.text_to_speech(trans_text, st.session_state[SESSION_PREF_LANG])
             md_audio = md_autoplay_audio(audio)
             text_col, audio_col = st.columns(2)
             with text_col as col:
