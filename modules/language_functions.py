@@ -93,8 +93,7 @@ def text_to_speech(text: str, lang: str) -> bytes:
     return speech
 
 if __name__ == '__main__':
-    print(translate_string("Hello", "fr"))
 
-    with open('myfilefrench.wav', mode='bw') as f:
-        f.write(text_to_speech("Bonjour", "fr"))
+    with open('myfilegerman.wav', mode='bw') as f:
+        f.write(text_to_speech(translate_string("Good Morning", "de"),"de"))
     f.close()
