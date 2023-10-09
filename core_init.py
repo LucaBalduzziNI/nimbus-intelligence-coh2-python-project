@@ -76,13 +76,13 @@ def init_app(userIP: str = None) -> ip_country:
         connect.execute_query(query)
 
     # Check if languages spoken in country are known
-    query = f"SELECT country_code, LANGUAGES_COUNTRY.language_code, native_name FROM LANGUAGES_COUNTRY LEFT JOIN LANGUAGES ON LANGUAGES_COUNTRY.language_code = LANGUAGES.language_code WHERE COUNTRY_CODE = '{userCountryCode}' "
+    query = f"SELECT country_code, language_code FROM LANGUAGES_COUNTRY WHERE COUNTRY_CODE = '{userCountryCode}' "
     results = connect.execute_query(query)
     if len(results) >= 1:
         # Retrieve cached languages
         language_list = []
         for result in results:
-            language_list.append([result['LANGUAGE_CODE'], result['NATIVE_NAME']])
+            language_list.append(result['LANGUAGE_CODE'])
     else:
         # Retrieve new list of languages and cache them
         if len(userLocation) == 0:
@@ -98,18 +98,23 @@ def init_app(userIP: str = None) -> ip_country:
     language_list_details = []
     for language in language_list:
         languageCode = language[0]
-        nativeName = language[1]
         query = f"SELECT language_code, native_name, can_be_translated, can_be_spoken FROM LANGUAGES WHERE LANGUAGE_CODE = '{languageCode}'"
         results = connect.execute_query(query)
         if len(results) == 1:
             # Retrieve cached knowledge on languages
             can_be_translated = results[0]['CAN_BE_TRANSLATED']
             can_be_spoken = results[0]['CAN_BE_SPOKEN']
+            nativeName = results[0]['NATIVE_NAME']
             language_list_details.append((languageCode, nativeName, can_be_translated, can_be_spoken))
         else:
             # Retrieve new list of knowledge on languages and cache them
+            if len(userLocation) == 0:
+            # In case the languages were known but the native name was not
+                userLocation = ipstack.resolve_ip(userIP)
+
             can_be_translated = translate.check_if_translatable(languageCode)
             can_be_spoken = tts.check_if_spoken(languageCode)
+            nativeName = language[1]
             language_list_details.append((languageCode, nativeName, can_be_translated, can_be_spoken))
             query = f"INSERT INTO LANGUAGES (language_code, native_name, can_be_translated, can_be_spoken) VALUES ('{languageCode}', '{nativeName}', '{can_be_translated}', '{can_be_spoken}')"
             connect.execute_query(query)
