@@ -4,11 +4,9 @@ import streamlit as st
 # Custom Modules
 try:
     from ..gui.session import *
-    from ..core_reset import reset_cache
     from ..core_set_pref_lang import set_pref_lang
 except Exception as e:
     from gui.session import *
-    from core_reset import reset_cache
     from core_set_pref_lang import set_pref_lang
 
 def settings():
@@ -29,6 +27,8 @@ def settings():
         _, btn_col_lang_sel, _ = st.columns((4,2,4))
         with btn_col_lang_sel as col:
             st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG]))
+        
+        st.divider()
 
 def set_session_pref_lang(ip_address: str, lang_code: str):
     st.session_state[SESSION_PREF_LANG_SET] = True
