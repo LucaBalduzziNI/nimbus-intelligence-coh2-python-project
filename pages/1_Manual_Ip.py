@@ -27,12 +27,16 @@ def manual_ip():
 def set_ip():
     if st.session_state[SESSION_IP]:
         ip_country = init_app(userIP=st.session_state[SESSION_IP])
-        if ip_country.pref_lang_code:
+        if ip_country.pref_lang_code and ip_country.pref_lang_code != 'None':
             st.session_state[SESSION_PREF_LANG] = ip_country.pref_lang_code
             st.session_state[SESSION_PREF_LANG_SET] = True
+        else:
+            st.session_state[SESSION_PREF_LANG_SET] = False
         st.session_state[SESSION_COUNTRY_NAME] = ip_country.country_name
         st.session_state[SESSION_COUNTRY_FLAG] = ip_country.country_flag
         st.session_state[SESSION_COUNTRY_LANGUAGES] = ip_country.lang_details
-
+    else:
+        st.session_state[SESSION_PREF_LANG_SET] = False
+        
 if __name__ == '__main__':
     manual_ip()
