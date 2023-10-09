@@ -30,12 +30,6 @@ def settings():
         with btn_col_lang_sel as col:
             st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG]))
 
-    # Reset cache
-    st.markdown('### Reset Cache')
-    _, btn_col_delete, _ = st.columns((4,2,4))
-    with btn_col_delete as col:
-        st.button('Reset', on_click=reset_cache, use_container_width=True)
-
 def set_session_pref_lang(ip_address: str, lang_code: str):
     st.session_state[SESSION_PREF_LANG_SET] = True
     set_pref_lang(ip_address, lang_code)
