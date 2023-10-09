@@ -1,0 +1,56 @@
+import connector as connect
+import translate_api as translate
+import tts_api as tts
+
+# Custom Modules
+try:
+    import secret_stuff
+    from errors import *
+except Exception as e:
+    from . import secret_stuff
+    from .errors import *
+
+def translate_string(original_string: str, language_code: str, source_language: str = "en") -> str:
+    """Translates a string through the API or retrieve translation from text
+
+    Args:
+        original_string (str): Text to be translated
+        language_code (str): Language code for the string to be translated to.
+        source_language (str, optional): Source language the text derives from. Defaults to "en".
+
+    Raises:
+        APITranslationError: _description_
+        LanguageCantBeTranslated: _description_
+
+    Returns:
+        str: The translated text
+    """
+
+    # Check if language can be spoken - These values were collected during initialization of the app
+    query = f"SELECT can_be_translated FROM languages WHERE language_code = '{language_code}'"
+    results = connect.execute_query(query)
+    if results[0]['CAN_BE_TRANSLATED'] == True:
+        #Check if the string is available for translation within the app
+        query = f"SELECT text_id from text_types WHERE source_text = '{original_string}' AND source_lang_code = '{source_language}'"
+        results = connect.execute_query(query)
+        if len(results) == 1:
+            text_id = results[0]['TEXT_ID']
+            #Check if the translation of the string is already known
+            query = f"SELECT target_txt FROM translations WHERE text_id = '{text_id}' and language_code = '{language_code}'"
+            results = connect.execute_query(query)
+            if len(results) == 1:
+                #Retrieve translation from cache
+                translation = results[0]['TARGET_TXT']
+            else:
+                #Translate and cache
+                translation = translate.translate_string(original_string, language_code, source_language)
+                query = f"INSERT INTO translations (language_code, text_id, target_txt) VALUES ('{language_code}', '{text_id}', '{translation}')"
+                connect.execute_query(query)
+        else:
+            raise Exception("String is not in present in text types")
+    else:
+        raise LanguageCantBeTranslated(language_code)
+    return translation
+
+if __name__ == '__main__':
+    print(translate_string("Hello", "fr"))
