@@ -16,7 +16,7 @@ def manual_ip():
     
     st.divider()
 
-    ips = [None, '109.88.0.0']
+    ips = [None, '109.88.0.0', '67.139.45.218', '152.67.164.82', '131.227.153.30', '126.151.105.249', '187.238.122.202', '105.203.33.244', '179.138.100.251', '81.164.150.203']
     st.markdown('### Select an IP address from the list:')
     ip = st.selectbox('', ips)
     st.session_state[SESSION_IP] = ip
