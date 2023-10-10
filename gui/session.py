@@ -12,10 +12,18 @@ SESSION_INS_SOURCE_LANG = 'INS_SOURCE_LANG'
 SESSION_INS_ERROR = 'INS_ERROR'
 
 def _set_default(key: str, value: any = None):
+    """Sets the default for the variable if not alredy set.
+
+    Args:
+        key (str): the session variable key
+        value (any, optional): value of the session variable. Defaults to None.
+    """
     if key not in st.session_state.keys():
         st.session_state.setdefault(key, value)
 
 def initialize_session():
+    """Initializes session variables.
+    """
     _set_default(SESSION_IP)
     _set_default(SESSION_COUNTRY_NAME)
     _set_default(SESSION_COUNTRY_FLAG)

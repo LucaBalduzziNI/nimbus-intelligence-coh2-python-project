@@ -16,16 +16,24 @@ def manual_ip():
     
     st.divider()
 
+    # List of ips for the demo
     ips = [None, '109.88.0.0', '67.139.45.218', '152.67.164.82', '131.227.153.30', '126.151.105.249', '187.238.122.202', '105.203.33.244', '179.138.100.251', '81.164.150.203']
+    
     st.markdown('### Select an IP address from the list:')
     ip = st.selectbox('A', ips, label_visibility='hidden')
-    st.session_state[SESSION_IP] = ip
     _, btn_col, _ = st.columns((4,2,4))
     with btn_col as col:
-        st.button('Confirm', on_click=set_ip, use_container_width=True)
+        st.button('Confirm', on_click=set_ip, args=(ip,), use_container_width=True)
 
-def set_ip():
-    if st.session_state[SESSION_IP]:
+def set_ip(ip_address: str):
+    """Sets the ip of the session and its session variables.
+
+    Args:
+        ip_address (str): the ip to set in the session
+    """
+    st.session_state[SESSION_IP] = ip_address
+    # Setting the values only if the ip is valid
+    if st.session_state[SESSION_IP]:  
         ip_country = init_app(userIP=st.session_state[SESSION_IP])
         if ip_country.pref_lang_code and ip_country.pref_lang_code != 'None':
             st.session_state[SESSION_PREF_LANG] = ip_country.pref_lang_code

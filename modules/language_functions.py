@@ -1,12 +1,10 @@
 # Custom Modules
 try:
-    import secret_stuff
     import connector as connect
     import translate_api as translate
     import tts_api as tts
     from errors import *
 except Exception as e:
-    from . import secret_stuff
     from . import connector as connect
     from . import translate_api as translate
     from . import tts_api as tts
@@ -21,8 +19,7 @@ def translate_string(original_string: str, language_code: str, source_language: 
         source_language (str, optional): Source language the text derives from. Defaults to "en".
 
     Raises:
-        APITranslationError: _description_
-        LanguageCantBeTranslated: _description_
+        LanguageCantBeTranslated: the translation language of the text is not supported by the API.
 
     Returns:
         str: The translated text

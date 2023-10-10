@@ -1,3 +1,6 @@
+# Credits for wav joining: https://stackoverflow.com/questions/2890703/how-to-join-two-wav-files-using-python
+# Credits for wav file opening error: https://stackoverflow.com/questions/25672289/failed-to-open-file-file-wav-as-a-wav-due-to-file-does-not-start-with-riff-id
+
 # Modules
 import os
 import soundfile
@@ -13,7 +16,16 @@ try:
 except Exception as e:
     raise e
 
-def get_info(ip_address: str, transl_lang: str) -> List[str]:
+def get_info(ip_address: str, transl_lang: str) -> tuple:
+    """Retrieves information of the weather for the current ip and the tts audio of it.
+
+    Args:
+        ip_address (str): the ip address to geolocalize
+        transl_lang (str): the target translation language
+
+    Returns:
+        tuple: tuple containing the sentence and the audio about the weather.
+    """
     
     # Getting weather info
     weather = get_weather(ip_address)

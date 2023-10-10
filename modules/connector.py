@@ -12,7 +12,7 @@ def execute_query(query: str, params: tuple = None) -> List[dict]:
     """This method interacts with snowflake through the snowflake connector, handling the opening and closing of the connection.
 
     Raises:
-        e: _description_
+        Exception: any exception that could arise in the execution
 
     Returns:
         List[dict]: The result of the query. It can be data (if a select statement is given) or informations about the given command. 

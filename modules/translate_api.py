@@ -52,8 +52,7 @@ def translate_string(original_string: str, language_code: str, source_language: 
         source_language (str, optional): Source language the text derives from. Defaults to "en".
 
     Raises:
-        APITranslationError: _description_
-        LanguageCantBeTranslated: _description_
+        APITranslationError: error when translating the text
 
     Returns:
         str: The translated text
@@ -89,8 +88,6 @@ def translate_string(original_string: str, language_code: str, source_language: 
             
             else:
                 raise APITranslationError(source_language, language_code)
-            
-            
         #else:
             #raise LanguageCantBeTranslated(language_code)
     else:

@@ -52,10 +52,10 @@ def admin():
     tables = ['Countries', 'IP_Addresses', 'Languages_Country', 'Languages', 'Translations', 'Text_Types']
     st.markdown('### Reset Cache')
     st.markdown('#### Choose a table to reset:')
-    table = st.selectbox('A', tables, label_visibility='hidden')
+    st.selectbox('A', tables, key=SESSION_TABLE_DEL, label_visibility='hidden')
     _, btn_col_delete, _ = st.columns((4,2,4))
     with btn_col_delete as col:
-        st.button('Reset', on_click=reset_cache, use_container_width=True, args=(table,))
+        st.button('Reset', on_click=reset_cache, use_container_width=True, args=(st.session_state[SESSION_TABLE_DEL],))
 
 def check_input() -> bool:
     """Checks the input fields returning True if the are not None and contain text.
