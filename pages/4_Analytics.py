@@ -41,13 +41,19 @@ def analytics():
     st.text("Total cached sentence chunks for translation: "+str(chunk_analytics()))
     st.text("Total cached translations: "+str(translate_analytics()))
 
-    st.markdown('#### Number of different translations per chunk')
-    st.bar_chart(translate_chunk(), x = "TEXT_ID")
+    #st.markdown('#### Number of different translations per chunk')
+    #st.bar_chart(translate_chunk(), x = "TEXT_ID")
 
 
     st.markdown('#### Number of translated chunks per language')
     st.bar_chart(chunk_language(), x = "LANGUAGE_CODE")
+
+    st.markdown('### Request data')
+    st.text("Total requests made: "+str(requests_analytics()) + " of which "+str(cache_analytics())+" retrieved from cache")
+
+    st.bar_chart(cache_details(), x = "TIMESTAMP", y = "API_CODE", color = "CACHED")
     
+
 
 
 if __name__ == '__main__':
