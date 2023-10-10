@@ -5,13 +5,13 @@ import streamlit as st
 try:
     from ..modules.errors import *
     from ..gui.session import *
-    from ..core_reset import reset_cache
-    from ..core_text_types import get_texts, add_text as _add_text
+    from ..modules.core.core_reset import reset_cache
+    from ..modules.core.core_text_types import get_texts, add_text as _add_text
 except Exception as e:
     from modules.errors import *
     from gui.session import *
-    from core_reset import reset_cache
-    from core_text_types import get_texts, add_text as _add_text
+    from modules.core.core_reset import reset_cache
+    from modules.core.core_text_types import get_texts, add_text as _add_text
 
 def admin():
     initialize_session()

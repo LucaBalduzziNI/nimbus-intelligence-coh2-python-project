@@ -4,10 +4,11 @@ from collections import namedtuple
 
 # Custom Modules
 try:
-    from modules import connector
-    from modules.errors import *
+    from .. import connector
+    from ..errors import *
 except Exception as e:
-    raise e
+    import modules.connector
+    from modules.errors import *
 
 def get_texts() -> List[dict]:
     """Retrieves all text types form the DB.

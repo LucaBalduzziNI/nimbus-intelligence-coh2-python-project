@@ -2,8 +2,13 @@
 import streamlit as st
 
 # Custom Modules
-from gui.session import *
-from core_init import init_app
+try:
+    from ..gui.session import *
+    from ..modules.core.core_init import init_app
+except Exception:
+    from gui.session import *
+    from modules.core.core_init import init_app
+
 
 def manual_ip():
   

@@ -3,9 +3,9 @@ import requests
 
 # Custom Modules
 try:
-    from errors import *
+    from ..errors import *
 except Exception as e:
-    from .errors import *
+    from modules.errors import *
 
 def get_ip() -> str:
     """Gets the IP of the machine.

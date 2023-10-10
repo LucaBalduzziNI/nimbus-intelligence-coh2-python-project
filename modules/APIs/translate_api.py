@@ -3,12 +3,11 @@ import requests
 
 # Custom Modules
 try:
-    import secret_stuff
-    from errors import *
+    from .. import secret_stuff
+    from ..errors import *
 except Exception as e:
-    from . import secret_stuff
-    from .errors import *
-
+    import modules.secret_stuff
+    from modules.errors import *
 
 def check_if_translatable(language_code: str):
     """Checks if the language is available to translate

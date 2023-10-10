@@ -5,12 +5,10 @@ import pandas as pd
 # Custom Modules
 try:
     from ..gui.session import *
-    from ..core_analytics import *
+    from ..modules.core.core_analytics import *
 except Exception as e:
     from gui.session import *
-    from core_analytics import *
-
-
+    from modules.core.core_analytics import *
 
 def analytics():
   

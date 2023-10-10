@@ -1,17 +1,19 @@
 # Modules
-import time
 import base64
 import streamlit as st
 from streamlit_extras import add_vertical_space
 
 # Custom Modules
-from gui.session import *
-from core_init import init_app
-from core_set_pref_lang import set_pref_lang
-from core_info import get_info
+try:
+    from gui.session import *
+    from modules.core.core_init import init_app
+    from modules.core.core_set_pref_lang import set_pref_lang
+    from modules.core.core_info import get_info
+except Exception as e:
+    raise e
 
 # App
-def main():
+def home():
 
     initialize_session()
     
@@ -94,4 +96,4 @@ def md_autoplay_audio(audio: bytes) -> str:
     return md
 
 if __name__ == '__main__':
-    main()
+    home()

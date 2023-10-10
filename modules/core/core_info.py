@@ -9,12 +9,15 @@ from typing import List
 
 # Custom Modules
 try:
-    from modules import language_functions
-    from modules.errors import *
-    from modules.weather_api import get_weather
+    from .. import language_functions
+    from ..errors import *
+    from ..APIs.weather_api import get_weather
     from core_text_types import add_text
 except Exception as e:
-    raise e
+    import modules.language_functions
+    from modules.errors import *
+    from modules.APIs.weather_api import get_weather
+    from modules.core.core_text_types import add_text
 
 def get_info(ip_address: str, transl_lang: str) -> tuple:
     """Retrieves information of the weather for the current ip and the tts audio of it.
@@ -106,4 +109,3 @@ def get_info(ip_address: str, transl_lang: str) -> tuple:
 
 if __name__ == '__main__':
     print(get_info('95.231.206.38', 'it'))
-

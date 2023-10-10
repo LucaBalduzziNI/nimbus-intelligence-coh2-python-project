@@ -1,14 +1,14 @@
 # Custom Modules
 try:
     import connector as connect
-    import translate_api as translate
-    import tts_api as tts
+    import APIs.translate_api as translate
+    import APIs.tts_api as tts
     from errors import *
 except Exception as e:
-    from . import connector as connect
-    from . import translate_api as translate
-    from . import tts_api as tts
-    from .errors import *
+    import modules.connector as connect
+    import modules.APIs.translate_api as translate
+    import modules.APIs.tts_api as tts
+    from modules.errors import *
 
 def translate_string(original_string: str, language_code: str, source_language: str = "en") -> str:
     """Translates a string through the API or retrieve translation from cache

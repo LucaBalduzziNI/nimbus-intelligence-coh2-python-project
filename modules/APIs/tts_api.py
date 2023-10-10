@@ -3,11 +3,11 @@ import requests
 
 # Custom Modules
 try:
-    import secret_stuff
-    from errors import *
+    from .. import secret_stuff
+    from ..errors import *
 except Exception as e:
-    from . import secret_stuff
-    from .errors import *
+    import modules.secret_stuff
+    from modules.errors import *
 
 def check_if_spoken(language_code: str):
 

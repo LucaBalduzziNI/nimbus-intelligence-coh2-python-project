@@ -2,9 +2,9 @@ import pandas as pd
 
 #Custom Modules
 try:
-    import modules.connector as connect
+    from .. import connector as connect
 except Exception as e:
-    from . import connector as connect
+    import modules.connector as connect
 
 
 def ip_analytics():
