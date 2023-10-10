@@ -42,13 +42,14 @@ def admin():
 
     _, btn_insert_col, _ = st.columns((4,2,4))
     with btn_insert_col as col:
+        # The button gets activated once the input is correct
         disabled = not check_input()
         st.button('Insert', use_container_width=True, on_click=add_text, args=(st.session_state[SESSION_INS_SOURCE_TEXT], st.session_state[SESSION_INS_SOURCE_LANG]), disabled=disabled)
 
     st.divider()
 
     # Reset cache
-    tables = ['Countries', 'IP_Addresses', 'Languages_Country', 'Languages', 'Translations']
+    tables = ['Countries', 'IP_Addresses', 'Languages_Country', 'Languages', 'Translations', 'Text_Types']
     st.markdown('### Reset Cache')
     st.markdown('#### Choose a table to reset:')
     table = st.selectbox('A', tables, label_visibility='hidden')
@@ -56,16 +57,29 @@ def admin():
     with btn_col_delete as col:
         st.button('Reset', on_click=reset_cache, use_container_width=True, args=(table,))
 
-def check_input():
+def check_input() -> bool:
+    """Checks the input fields returning True if the are not None and contain text.
+
+    Returns:
+        bool: the evaluation of the check
+    """
     return (st.session_state[SESSION_INS_SOURCE_TEXT] is not None 
             and st.session_state[SESSION_INS_SOURCE_TEXT] != ''
             and st.session_state[SESSION_INS_SOURCE_LANG] is not None
             and st.session_state[SESSION_INS_SOURCE_LANG] != '')
 
 def add_text(text: str, source_lang: str):
+    """Adds a new text_type in the DB and resets session values of input.
+
+    Args:
+        text (str): the text_type to be stored
+        source_lang (str): the source language of the text
+    """
     try:
         _add_text(text, source_lang)
         st.session_state[SESSION_INS_ERROR] = None
+        st.session_state[SESSION_INS_SOURCE_TEXT] = None
+        st.session_state[SESSION_INS_SOURCE_TEXT] = None
     except TextTypeIsAlreadyStored as e:
         st.session_state[SESSION_INS_ERROR] = str(e)
 
