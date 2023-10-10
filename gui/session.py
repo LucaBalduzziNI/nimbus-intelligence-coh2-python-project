@@ -10,6 +10,7 @@ SESSION_PREF_LANG_SET = 'PREF_LANG_SET'
 SESSION_INS_SOURCE_TEXT = 'INS_SOURCE_TEXT'
 SESSION_INS_SOURCE_LANG = 'INS_SOURCE_LANG'
 SESSION_INS_ERROR = 'INS_ERROR'
+SESSION_TABLE_DEL = 'TABLE_DEL'
 
 def _set_default(key: str, value: any = None):
     """Sets the default for the variable if not alredy set.
@@ -33,3 +34,4 @@ def initialize_session():
     _set_default(SESSION_INS_SOURCE_TEXT)
     _set_default(SESSION_INS_SOURCE_LANG)
     _set_default(SESSION_INS_ERROR)
+    _set_default(SESSION_TABLE_DEL)
