@@ -11,15 +11,15 @@ def get_info(ip_address: str) -> str:
     
     # Getting weather info
     weather = get_weather(ip_address)
-    hour = weather['local_time'].split(' ')[1].split(':')[0]
+    hour = int(weather['local_time'].split(' ')[1].split(':')[0])
     temp = str(weather['temp_c']).split('.')[0]
-    
+    print(hour)
     # Selecting greeting
-    if hour < '12':
+    if hour < 13:
         greeting = 'Good Morning'
-    elif hour < '19':
+    elif hour < 19:
         greeting = 'Good Afternoon'
-    elif hour < '23':
+    elif hour < 23:
         greeting = 'Good Evening'
     else:
         greeting = 'Good Night'
@@ -33,4 +33,7 @@ def get_info(ip_address: str) -> str:
         pass
 
     return info
+
+if __name__ == '__main__':
+    print(get_info('95.231.206.38'))
 
