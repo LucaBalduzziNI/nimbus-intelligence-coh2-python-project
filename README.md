@@ -20,7 +20,7 @@ SNOWSQL_DB = Your Snowflake database
 SNOWSQL_SCH = Your Snowflake schema
 ```
 
-## Requirement Installation
+## Requirements Installation
 
 Requirements for python can be obtained using the command:
 
