@@ -16,9 +16,9 @@ def main():
     initialize_session()
     
     # Configurations
-    st.set_page_config(page_title='Translation and TTS App', page_icon='🌐', layout='wide')
+    st.set_page_config(page_title='SpeakSky', page_icon='🌐', layout='wide')
     
-    app_title = st.title('Translation and TTS App 🌐')
+    app_title = st.title('SpeakSky 🌐')
     
     st.divider()
     
