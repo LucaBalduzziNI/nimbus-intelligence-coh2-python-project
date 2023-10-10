@@ -1,5 +1,6 @@
 # Folders
 .venv
+__pycache__/
 
 # Settings Filse
 PipFile
