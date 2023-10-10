@@ -34,3 +34,9 @@ CREATE OR REPLACE TABLE Translations(
     target_txt varchar,
     target_audio_bin BINARY
 );
+
+CREATE OR REPLACE TABLE REQUEST_LOG(
+    api_code varchar,
+    cached boolean,
+    timestamp datetime
+);
