@@ -33,8 +33,9 @@ def analytics():
     st.markdown('#### Preferred languages per country')
     country_list = country_list_analytics()
     print(country_list)
-    countrySelect = st.selectbox("Country", country_list[0]["COUNTRY_CODE"])
-    st.bar_chart(country_language_analytics(countrySelect), x = "PREF_LANG_CODE")
+    countrySelect = st.selectbox("Country", country_list, format_func=lambda d: d['COUNTRY_NAME'])
+    #st.bar_chart(country_language_analytics(countrySelect), x = "PREF_LANG_CODE")
+    st.bar_chart(country_language_analytics(countrySelect['COUNTRY_CODE']), x = "PREF_LANG_CODE")
 
     st.markdown('### Translation data')
     st.text("Total cached sentence chunks for translation: "+str(chunk_analytics()))
