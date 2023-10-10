@@ -16,10 +16,10 @@ def get_weather(ip_address: str) -> dict:
         ip_address (str): the ip to geolocalize
 
     Raises:
-        ConnectionError: raised if the request to the API is not successfull
+        ConnectionError: raised if the request to the API is not successful
 
     Returns:
-        dict: dictionary containing city, local_time, temp_c and condition of the weather
+        dict: dictionary containing local_time, temp_c and condition of the weather
     """
     
     url = "https://weatherapi-com.p.rapidapi.com/current.json"
@@ -35,11 +35,10 @@ def get_weather(ip_address: str) -> dict:
 
     if response.status_code == 200:
         data = response.json()
-        city = data['location']['name']
         local_time = data['location']['localtime']
         temp_c = data['current']['temp_c']
         condition = data['current']['condition']['text']
-        return {'city': city, 'local_time': local_time, 'temp_c': temp_c, 'condition': condition}
+        return {'local_time': local_time, 'temp_c': temp_c, 'condition': condition}
     else:
         raise ConnectionError()
 
