@@ -1,4 +1,4 @@
-# Nimbus Intelligence Cohort2 Python-Snowflake Project: SpeakSky
+# Nimbus Intelligence Cohort2 Python-Snowflake Project: SkySpeak
 
 This repository is a Python-Snowflake project developed during the Nimbus Intelligence Academy.
 

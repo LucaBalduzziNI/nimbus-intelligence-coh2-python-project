@@ -16,9 +16,9 @@ def main():
     initialize_session()
     
     # Configurations
-    st.set_page_config(page_title='SpeakSky', page_icon='🌐', layout='wide')
+    st.set_page_config(page_title='SkySpeak', page_icon='🌐', layout='wide')
     
-    app_title = st.title('SpeakSky 🌐')
+    app_title = st.title('SkySpeak 🌐')
     
     st.divider()
     
