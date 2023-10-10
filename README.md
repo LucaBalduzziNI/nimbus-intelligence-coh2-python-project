@@ -33,5 +33,5 @@ pip install -r ./requirements.txt
 The app can be launched by typing:
 
 ```
-python run ./Home.py
+streamlit run ./Home.py
 ```
