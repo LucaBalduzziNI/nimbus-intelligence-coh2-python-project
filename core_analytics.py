@@ -59,3 +59,22 @@ def chunk_language():
     results = connect.execute_query(query)
     chunks = pd.DataFrame(data=results, columns=["TEXTCOUNT", "LANGUAGE_CODE"])
     return chunks
+
+def requests_analytics():
+    #Total requests logged
+    query = f"SELECT COUNT(*) FROM REQUEST_LOG"
+    results = connect.execute_query(query)
+    return results[0]['COUNT(*)']
+
+def cache_analytics():
+    #Total cached requests logged
+    query = f"SELECT COUNT(*) FROM REQUEST_LOG WHERE CACHED = TRUE"
+    results = connect.execute_query(query)
+    return results[0]['COUNT(*)']
+
+def cache_details():
+    #Graphable cache details
+    query = f"SELECT API_CODE, CACHED, TIMESTAMP FROM REQUEST_LOG"
+    results = connect.execute_query(query)
+    cache = pd.DataFrame(data=results, columns=["API_CODE", "CACHED", "TIMESTAMP"])
+    return cache
