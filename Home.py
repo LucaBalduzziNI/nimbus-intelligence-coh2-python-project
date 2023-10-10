@@ -14,7 +14,6 @@ from core_info import get_info
 def main():
 
     initialize_session()
-    print(st.session_state)
     
     # Configurations
     st.set_page_config(page_title='Translation and TTS App', page_icon='🌐', layout='wide')
