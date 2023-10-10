@@ -50,14 +50,14 @@ def main():
             with btn_col_lang_sel as col:
                 st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG]))
         else:
-            # Greet the user
-            info = get_info(st.session_state[SESSION_IP])
-            trans_text = language_functions.translate_string(info, st.session_state[SESSION_PREF_LANG])
-            audio = language_functions.text_to_speech(trans_text, st.session_state[SESSION_PREF_LANG])
-            md_audio = md_autoplay_audio(audio)
+            # Greet the user with info about weather
+            info = get_info(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG])
+
+
+            md_audio = md_autoplay_audio(info[1])
             text_col, audio_col = st.columns(2)
             with text_col as col:
-                st.write(trans_text)
+                st.write(info[0])
             with audio_col as col:
                 st.markdown(md_audio, unsafe_allow_html=True)
                 
