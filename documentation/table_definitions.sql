@@ -18,7 +18,8 @@ CREATE OR REPLACE TABLE Languages_Country(
 CREATE OR REPLACE TABLE Languages(
     language_code varchar,
     can_be_translated boolean,
-    can_be_spoken boolean
+    can_be_spoken boolean,
+    native_name varchar
 );
 
 CREATE OR REPLACE TABLE Text_types(
@@ -31,6 +32,11 @@ CREATE OR REPLACE TABLE Translations(
     language_code varchar,
     text_id int,
     target_txt varchar,
-    target_audio_bin binary
+    target_audio_bin BINARY
 );
 
+CREATE OR REPLACE TABLE REQUEST_LOG(
+    api_code varchar,
+    cached boolean,
+    timestamp datetime
+);

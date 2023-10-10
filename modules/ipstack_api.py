@@ -17,8 +17,8 @@ def resolve_ip(ip: str) -> dict:
         ip (str): IP address
 
     Raises:
-        IpCantBeResolved: _description_
-        ConnectionError: _description_
+        IpCantBeResolved: raised if given ip does not exist or it can't be resolved.
+        ConnectionError: raised if the connection with the API was not successful
 
     Returns:
         dict: Dictionary containing the location code and a list of language codes spoken in this location
@@ -34,11 +34,12 @@ def resolve_ip(ip: str) -> dict:
     if response.status_code == 200:      
         data = response.json()
         language_list = []
+        
         # Check if the Ip has been resolved
         if 'location' in data and data['location']['languages'] is not None:
 
             for language in data['location']['languages']:
-                language_list.append(language['code'])
+                language_list.append([language['code'], language['native']])
             country_code = data['country_code']
             country_name = data['country_name']
             country_flag = data['location']['country_flag']

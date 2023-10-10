@@ -48,3 +48,13 @@ class LanguageCantBeSpoken(Exception):
     
     def __str__(self) -> str:
         return f'Language {self.language} can\'t be spoken!' 
+    
+class TextTypeIsAlreadyStored(Exception):
+    """Exception raised if trying to insert a duplicated text type"""
+
+    def __init__(self, text: str, *args):
+        super().__init__(args)
+        self.text = text
+    
+    def __str__(self) -> str:
+        return f'The Text "{self.text}" is already stored in the DB!'
