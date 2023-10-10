@@ -18,7 +18,6 @@ except Exception as e:
     from . import connector as connect
 
 # Custom Tuples 
-
 ip_country = namedtuple('ip_country', [
     'ip_address',
     'pref_lang_code',
