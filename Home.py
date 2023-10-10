@@ -5,7 +5,6 @@ import streamlit as st
 from streamlit_extras import add_vertical_space
 
 # Custom Modules
-from modules import language_functions
 from gui.session import *
 from core_init import init_app
 from core_set_pref_lang import set_pref_lang
@@ -52,8 +51,6 @@ def main():
         else:
             # Greet the user with info about weather
             info = get_info(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG])
-
-
             md_audio = md_autoplay_audio(info[1])
             text_col, audio_col = st.columns(2)
             with text_col as col:
@@ -62,6 +59,8 @@ def main():
                 st.markdown(md_audio, unsafe_allow_html=True)
                 
 def init_ip():
+    """Inits the ip and sets the session variables
+    """
     ip_country = init_app()
     st.session_state[SESSION_IP] = ip_country.ip_address
     if ip_country.pref_lang_code:
@@ -72,10 +71,21 @@ def init_ip():
     st.session_state[SESSION_COUNTRY_LANGUAGES] = ip_country.lang_details
 
 def set_session_pref_lang(ip_address: str, lang_code: str):
+    """Sets the preferred language for the session, as a session variable and in the DB.
+
+    Args:
+        ip_address (str): ip address to make the changes on
+        lang_code (str): language code to be set as preferred
+    """
     st.session_state[SESSION_PREF_LANG_SET] = True
     set_pref_lang(ip_address, lang_code)
 
 def md_autoplay_audio(audio: bytes) -> str:
+    """Creates a md text to incorporate the audio in the app. Makes it auto start.
+
+    Args:
+        audio (bytes): the audio to be embedded in the markdown
+    """
     b64 = base64.b64encode(audio).decode()
     md = f"""
         <audio controls autoplay="true">
