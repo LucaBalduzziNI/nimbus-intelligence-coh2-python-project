@@ -10,6 +10,17 @@ except Exception as e:
     from .errors import *
 
 def get_weather(ip_address: str) -> dict:
+    """Fetches informations about weather by the location of the Ip address
+
+    Args:
+        ip_address (str): the ip to geolocalize
+
+    Raises:
+        ConnectionError: raised if the request to the API is not successfull
+
+    Returns:
+        dict: dictionary containing city, local_time, temp_c and condition of the weather
+    """
     
     url = "https://weatherapi-com.p.rapidapi.com/current.json"
 
@@ -24,7 +35,6 @@ def get_weather(ip_address: str) -> dict:
 
     if response.status_code == 200:
         data = response.json()
-        print(data)
         city = data['location']['name']
         local_time = data['location']['localtime']
         temp_c = data['current']['temp_c']
