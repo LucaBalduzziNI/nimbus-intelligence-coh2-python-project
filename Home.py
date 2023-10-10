@@ -46,7 +46,7 @@ def main():
             pref_lang = st.selectbox('A', st.session_state[SESSION_COUNTRY_LANGUAGES], format_func=lambda language: language[1], label_visibility='hidden')
             _, btn_col_lang_sel, _ = st.columns(3)
             with btn_col_lang_sel as col:
-                st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG], pref_lang[0]))
+                st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], pref_lang[0]))
         else:
             # Greet the user with info about weather
             info = get_info(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG])
