@@ -19,7 +19,7 @@ def check_if_spoken(language_code: str):
         bool: Whether the language can be spoken by the API
 
     Raises:
-        ConnectionError: _description_
+        ConnectionError: raised if connection with the API was not successful
       
     """
     url = "https://text-to-speech27.p.rapidapi.com/speech"
@@ -50,10 +50,9 @@ def text_to_speech(text: str, lang: str) -> bytes:
         lang (str): The language of the TTS converision
 
     Raises:
-        TextIsBlank: _description_
-        LanguageCantBeSpoken: _description_
-        ConnectionError: _description_
-        ConnectionError: _description_
+        TextIsBlank: raised if the given text is an empty string
+        LanguageCantBeSpoken: raised if the given language cannot be TTS by the API
+        ConnectionError: raised if the connection with the API was not successful
 
     Returns:
         bytes: The audio file in bytes
