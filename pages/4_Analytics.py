@@ -27,12 +27,26 @@ def analytics():
     st.markdown('#### IPs per country')
 
     st.text("Total resolved IP addresses cached: "+str(ip_analytics()))
-    st.bar_chart(country_code_analytics(), x = "COUNTRY_CODE")
+    st.bar_chart(country_code_analytics(), x = "COUNTRY_NAME")
 
 
     st.markdown('#### Preferred languages per country')
-    countrySelect = st.selectbox("Country", country_list_analytics())
+    country_list = country_list_analytics()
+    print(country_list)
+    countrySelect = st.selectbox("Country", country_list[0]["COUNTRY_CODE"])
     st.bar_chart(country_language_analytics(countrySelect), x = "PREF_LANG_CODE")
+
+    st.markdown('### Translation data')
+    st.text("Total cached sentence chunks for translation: "+str(chunk_analytics()))
+    st.text("Total cached translations: "+str(translate_analytics()))
+
+    st.markdown('#### Number of different translations per chunk')
+    st.bar_chart(translate_chunk(), x = "TEXT_ID")
+
+
+    st.markdown('#### Number of translated chunks per language')
+    st.bar_chart(chunk_language(), x = "LANGUAGE_CODE")
+    
 
 
 if __name__ == '__main__':
