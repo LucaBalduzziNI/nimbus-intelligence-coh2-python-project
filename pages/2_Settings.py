@@ -4,10 +4,10 @@ import streamlit as st
 # Custom Modules
 try:
     from ..gui.session import *
-    from ..core_set_pref_lang import set_pref_lang
+    from ..modules.core.core_set_pref_lang import set_pref_lang
 except Exception as e:
     from gui.session import *
-    from core_set_pref_lang import set_pref_lang
+    from modules.core.core_set_pref_lang import set_pref_lang
 
 def settings():
     initialize_session()

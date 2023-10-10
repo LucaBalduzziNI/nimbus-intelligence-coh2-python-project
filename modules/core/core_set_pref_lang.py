@@ -1,8 +1,8 @@
 # Custom Modules
 try:
-    import modules.connector as connect
+    from .. import connector as connect
 except Exception as e:
-    from . import connector as connect
+    import modules.connector as connect
 
 def set_pref_lang(ip_address: str, lang_code: str):
     """Sets the preffered language associated to the ip.

@@ -3,11 +3,11 @@ import requests
 
 # Custom Modules
 try:
-    import secret_stuff
-    from errors import *
+    from .. import secret_stuff
+    from ..errors import *
 except Exception as e:
-    from . import secret_stuff
-    from .errors import *
+    import modules.secret_stuff
+    from modules.errors import *
 
 def get_weather(ip_address: str) -> dict:
     """Fetches informations about weather by the location of the Ip address

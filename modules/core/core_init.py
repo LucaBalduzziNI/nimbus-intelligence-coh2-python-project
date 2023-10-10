@@ -3,19 +3,19 @@ from collections import namedtuple
 
 # Custom Modules
 try:
-    import modules.secret_stuff
-    import modules.ipstack_api as ipstack
-    import modules.translate_api as translate   
-    import modules.tts_api as tts
-    import modules.ipify_api as ipify
-    import modules.connector as connect
+    from .. import secret_stuff
+    from ..APIs import ipstack_api as ipstack
+    from ..APIs import translate_api as translate   
+    from ..APIs import tts_api as tts
+    from ..APIs import ipify_api as ipify
+    from .. import connector as connect
 except Exception as e:
-    from . import secret_stuff
-    from . import ipstack_api as ipstack
-    from . import translate_api as translate 
-    from . import tts_api as tts
-    from . import ipify_api as ipify
-    from . import connector as connect
+    import modules.secret_stuff
+    import modules.APIs.ipstack_api as ipstack
+    import modules.APIs.translate_api as translate 
+    import modules.APIs.tts_api as tts
+    import modules.APIs.ipify_api as ipify
+    import modules.connector as connect
 
 # Custom Tuples 
 ip_country = namedtuple('ip_country', [

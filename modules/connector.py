@@ -6,7 +6,7 @@ from typing import List
 try:
     import secret_stuff
 except Exception as e:
-    from . import secret_stuff
+    from modules import secret_stuff
 
 def execute_query(query: str, params: tuple = None) -> List[dict]:
     """This method interacts with snowflake through the snowflake connector, handling the opening and closing of the connection.
