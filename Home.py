@@ -43,11 +43,10 @@ def main():
         # Checking if multiple languages can be selected or aready selected preferred language
         if not st.session_state[SESSION_PREF_LANG_SET]:
             st.markdown('### Select your preferred language:')
-            pref_lang_code = st.selectbox('A', st.session_state[SESSION_COUNTRY_LANGUAGES], format_func=lambda language: language[1], label_visibility='hidden')
-            st.session_state[SESSION_PREF_LANG] = pref_lang_code[0]
+            pref_lang = st.selectbox('A', st.session_state[SESSION_COUNTRY_LANGUAGES], format_func=lambda language: language[1], label_visibility='hidden')
             _, btn_col_lang_sel, _ = st.columns(3)
             with btn_col_lang_sel as col:
-                st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG]))
+                st.button('Confirm language', use_container_width=True, on_click=set_session_pref_lang, args=(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG], pref_lang[0]))
         else:
             # Greet the user with info about weather
             info = get_info(st.session_state[SESSION_IP], st.session_state[SESSION_PREF_LANG])
@@ -70,15 +69,16 @@ def init_ip():
     st.session_state[SESSION_COUNTRY_FLAG] = ip_country.country_flag
     st.session_state[SESSION_COUNTRY_LANGUAGES] = ip_country.lang_details
 
-def set_session_pref_lang(ip_address: str, lang_code: str):
+def set_session_pref_lang(ip_address: str, pref_lang_code: str):
     """Sets the preferred language for the session, as a session variable and in the DB.
 
     Args:
         ip_address (str): ip address to make the changes on
-        lang_code (str): language code to be set as preferred
+        pref_lang_code (str): language code to be set as preferred
     """
     st.session_state[SESSION_PREF_LANG_SET] = True
-    set_pref_lang(ip_address, lang_code)
+    st.session_state[SESSION_PREF_LANG] = pref_lang_code
+    set_pref_lang(ip_address, pref_lang_code)
 
 def md_autoplay_audio(audio: bytes) -> str:
     """Creates a md text to incorporate the audio in the app. Makes it auto start.
