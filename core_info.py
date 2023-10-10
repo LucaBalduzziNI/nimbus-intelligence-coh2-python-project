@@ -8,20 +8,29 @@ except Exception as e:
     raise e
 
 def get_info(ip_address: str) -> str:
+    
+    # Getting weather info
     weather = get_weather(ip_address)
     hour = weather['local_time'].split(' ')[1].split(':')[0]
+    temp = str(weather['temp_c']).split('.')[0]
+    
+    # Selecting greeting
     if hour < '12':
         greeting = 'Good Morning'
-    elif hour < '20':
+    elif hour < '19':
+        greeting = 'Good Afternoon'
+    elif hour < '23':
         greeting = 'Good Evening'
-    else: 
+    else:
         greeting = 'Good Night'
     
-    info = greeting + ', the weather in ' + weather['city'] + ' is ' + weather['condition'] + ' with a temperature of ' + str(weather['temp_c']).split('.')[0] + ' degree celsius.'
+    info = greeting + ', the weather in ' + weather['city'] + ' is ' + weather['condition'] + ' with a temperature of ' + temp + ' degree celsius.'
 
+    # Storing if not present
     try:
         add_text(info, 'en')
     except TextTypeIsAlreadyStored as e:
         pass
+
     return info
 
