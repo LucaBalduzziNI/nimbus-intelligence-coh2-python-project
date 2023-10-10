@@ -43,10 +43,18 @@ def translate_string(original_string: str, language_code: str, source_language: 
             if len(results) == 1:
                 #Retrieve translation from cache
                 translation = results[0]['TARGET_TXT']
+                
+                #Log cached request
+                query = f"INSERT INTO REQUEST_LOG (API_CODE, CACHED, TIMESTAMP) VALUES ('TRANSLATE', TRUE, current_timestamp())"
+                connect.execute_query(query)
             else:
                 #Translate and cache
                 translation = translate.translate_string(original_string, language_code, source_language)
                 query = f"INSERT INTO translations (language_code, text_id, target_txt) VALUES ('{language_code}', '{text_id}', '{translation}')"
+                connect.execute_query(query)
+
+                #Log non-cached request
+                query = f"INSERT INTO REQUEST_LOG (API_CODE, CACHED, TIMESTAMP) VALUES ('TRANSLATE', FALSE, current_timestamp())"
                 connect.execute_query(query)
         else:
             raise Exception("String is not in present in text types")
@@ -81,10 +89,20 @@ def text_to_speech(text: str, lang: str) -> bytes:
             #Check if the string was also spoken already
             if results[0]['TARGET_AUDIO_BIN'] != None:
                 speech = results[0]['TARGET_AUDIO_BIN']
+
+                #Log cached request
+                query = f"INSERT INTO REQUEST_LOG (API_CODE, CACHED, TIMESTAMP) VALUES ('TTS', TRUE, current_timestamp())"
+                connect.execute_query(query)
+
             else:
                 #Speak and cache
                 speech = tts.text_to_speech(text, lang)                    
                 connect.execute_query('update translations set target_audio_bin = %s where target_txt = %s and language_code = %s', (speech, text, lang))
+
+                #Log non-cached request
+                query = f"INSERT INTO REQUEST_LOG (API_CODE, CACHED, TIMESTAMP) VALUES ('TTS', FALSE, current_timestamp())"
+                connect.execute_query(query)
+        
         else:
             raise Exception("String has not yet been translated before being spoken")           
 
